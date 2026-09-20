@@ -178,6 +178,40 @@ section.tight{ padding: clamp(50px, 8vw, 90px) 0; }
 .credit-list li span:first-child{ color: var(--paper); }
 .credit-list li span:last-child{ color: var(--paper-dim); }
 
+/* CONTACT FORM */
+.contact-form{ margin-top: 40px; border-top: 1px solid var(--line); padding-top: 34px; max-width: 46ch; }
+.contact-form h3{ font-family: var(--serif); font-weight: 500; font-size: 1.4rem; margin: 0 0 8px; }
+.contact-form > p{ margin: 0 0 26px; }
+.field{ margin-bottom: 20px; }
+.field label{ display:block; font-size: 0.88rem; color: var(--paper-dim); margin-bottom: 8px; }
+.field input, .field textarea{
+  width: 100%;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 0.98rem;
+  padding: 12px 14px;
+  border-radius: 3px;
+  resize: vertical;
+}
+.field input:focus, .field textarea:focus{
+  outline: none;
+  border-color: var(--soft);
+}
+.field textarea{ min-height: 130px; }
+.form-note{ margin-top: 16px; font-size: 0.85rem; color: var(--paper-dim); }
+.form-success{
+  display:none;
+  margin-top: 40px;
+  border-top: 1px solid var(--line);
+  padding-top: 34px;
+  max-width: 46ch;
+}
+.form-success.show{ display:block; }
+.form-success h3{ font-family: var(--serif); font-weight: 500; font-size: 1.4rem; margin: 0 0 8px; color: var(--soft); }
+.form-success p{ color: var(--paper-dim); margin: 0; }
+
 /* HOME PREVIEW SECTIONS */
 .preview-link{ display:inline-block; margin-top: 8px; color: var(--paper); text-decoration: underline; text-decoration-color: var(--loud-dim); text-underline-offset: 4px; font-size: 0.98rem; }
 .preview-link:hover{ text-decoration-color: var(--loud); }
@@ -236,13 +270,37 @@ footer{ border-top: 1px solid var(--line); padding: 40px 0 calc(40px + env(safe-
         stories you&rsquo;re drawn to, and where you&rsquo;re based.]</p>
         <p>Outside of film, I write <strong>fortepiano</strong>, a Substack
         on educating, thinking, and learning.</p>
-        <p>For inquiries, reach out at <strong>[your@email.com]</strong>.</p>
-
         <ul class="credit-list">
           <li><span>[Film title]</span><span>Curator / Executive Producer</span></li>
           <li><span>[Film title]</span><span>Curator / Executive Producer</span></li>
           <li><span>[Film title]</span><span>Curator / Executive Producer</span></li>
         </ul>
+
+        <form class="contact-form" id="contactForm" action="https://formspree.io/f/mzezervk" method="POST" onsubmit="return handleContactSubmit(event)">
+          <h3>Get in touch</h3>
+          <p>For inquiries about the films or the writing, send a message directly &mdash; no email address required.</p>
+
+          <div class="field">
+            <label for="cf-name">Name</label>
+            <input id="cf-name" name="name" type="text" required>
+          </div>
+          <div class="field">
+            <label for="cf-email">Your email</label>
+            <input id="cf-email" name="email" type="email" required>
+          </div>
+          <div class="field">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" name="message" required></textarea>
+          </div>
+
+          <button type="submit" class="btn primary">Send message</button>
+          <p class="form-note">Sent securely via Formspree &mdash; replies go straight to your inbox.</p>
+        </form>
+
+        <div class="form-success" id="formSuccess">
+          <h3>Message sent</h3>
+          <p>Thanks for reaching out &mdash; I&rsquo;ll get back to you soon.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -254,7 +312,7 @@ footer{ border-top: 1px solid var(--line); padding: 40px 0 calc(40px + env(safe-
     <div class="footer-links">
       <a href="https://fortepiano.substack.com/" target="_blank" rel="noopener">Substack</a>
       <a href="#" target="_blank" rel="noopener">YouTube</a>
-      <a href="mailto:your@email.com">Email</a>
+      <a href="about.html#contactForm">Contact</a>
     </div>
   </div>
 </footer>
@@ -265,6 +323,35 @@ footer{ border-top: 1px solid var(--line); padding: 40px 0 calc(40px + env(safe-
   const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 12);
   document.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  async function handleContactSubmit(e){
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    try{
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok){
+        form.style.display = 'none';
+        document.getElementById('formSuccess').classList.add('show');
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Send message';
+        alert('Something went wrong sending your message — please try again.');
+      }
+    } catch(err){
+      btn.disabled = false;
+      btn.textContent = 'Send message';
+      alert('Something went wrong sending your message — please try again.');
+    }
+    return false;
+  }
 </script>
 </body>
 </html>
