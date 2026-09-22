@@ -179,9 +179,22 @@ section.tight{ padding: clamp(50px, 8vw, 90px) 0; }
 .credit-list li span:last-child{ color: var(--paper-dim); }
 
 /* HOME PREVIEW SECTIONS */
-.preview-link{ display:inline-block; margin-top: 8px; color: var(--paper); text-decoration: underline; text-decoration-color: var(--loud-dim); text-underline-offset: 4px; font-size: 0.98rem; }
-.preview-link:hover{ text-decoration-color: var(--loud); }
-.about-teaser p{ font-size: 1.1rem; line-height: 1.65; color: var(--paper-dim); max-width: 60ch; font-family: var(--serif); }
+.link-rows{ border-top: 1px solid var(--line); }
+.link-row{
+  display:flex; align-items:baseline; justify-content:space-between; gap: 24px;
+  padding: 30px 0; border-bottom: 1px solid var(--line);
+  text-decoration:none; color: inherit;
+  transition: padding-left .25s ease;
+}
+.link-row:hover, .link-row:focus-visible{ padding-left: 10px; }
+.link-row:focus-visible{ outline: 2px solid var(--soft); outline-offset: 4px; }
+.link-row-title{ font-family: var(--serif); font-weight: 500; font-size: clamp(1.5rem, 3vw, 2.1rem); }
+.link-row-desc{ color: var(--paper-dim); font-size: 0.98rem; max-width: 34ch; text-align:right; }
+.link-row:hover .link-row-title{ color: var(--loud); }
+@media (max-width: 640px){
+  .link-row{ flex-direction: column; gap: 8px; }
+  .link-row-desc{ text-align:left; }
+}
 
 /* FOOTER */
 footer{ border-top: 1px solid var(--line); padding: 40px 0 calc(40px + env(safe-area-inset-bottom, 0px)); }
@@ -226,14 +239,15 @@ footer{ border-top: 1px solid var(--line); padding: 40px 0 calc(40px + env(safe-
   <section class="hero">
     <div class="hero-texture" aria-hidden="true"></div>
     <div class="wrap">
-      <p class="hero-eyebrow">Educator, curator, &amp; writer</p>
+      <p class="hero-eyebrow">Documentary curator, executive producer &amp; writer</p>
       <h1 class="title">
         <span><b>mw</b></span>
         <span><b>bettis</b></span>
       </h1>
       <p class="hero-sub">
-        See a curated collection of short documentary films, and read essays on
-        <strong>fortepiano</strong> &mdash; where I get loud (and soft) on educating, thinking, and learning.
+        A curated collection of short documentary films, and essays on
+        <strong>fortepiano</strong> &mdash; where I get loud (and soft) on
+        educating, thinking, and learning.
       </p>
       <div class="hero-cta">
         <a class="btn primary" href="films.html">See the films</a>
@@ -242,73 +256,21 @@ footer{ border-top: 1px solid var(--line); padding: 40px 0 calc(40px + env(safe-
     </div>
   </section>
 
-  <section class="tight" id="films-preview">
+  <section id="explore">
     <div class="wrap">
-      <div class="section-head">
-        <h2>Films</h2>
-        <p>Short documentary work I&rsquo;ve curated and executive produced.</p>
-      </div>
-      <div class="film-grid" style="grid-template-columns: repeat(auto-fill, minmax(260px,1fr));">
-        
-        <button class="film-card" data-title="[Film title]" data-year="[20XX]" data-video="">
-          <div class="film-frame">
-            <div class="sprocket-row top" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="ph-mark">[Placeholder still &mdash; add a frame from the film]</div>
-            <div class="sprocket-row bottom" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="play"><span class="play-ring"><svg width="16" height="18" viewBox="0 0 16 18" fill="none"><path d="M1 1L15 9L1 17V1Z" fill="#EDE8DD"/></svg></span></div>
-          </div>
-          <div class="film-meta">
-            <h3>[Film title]</h3>
-            <span class="year">[20XX]</span>
-          </div>
-          <p class="film-logline">[One-line logline describing the film goes here.]</p>
-        </button>
-        
-        <button class="film-card" data-title="[Film title]" data-year="[20XX]" data-video="">
-          <div class="film-frame">
-            <div class="sprocket-row top" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="ph-mark">[Placeholder still &mdash; add a frame from the film]</div>
-            <div class="sprocket-row bottom" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="play"><span class="play-ring"><svg width="16" height="18" viewBox="0 0 16 18" fill="none"><path d="M1 1L15 9L1 17V1Z" fill="#EDE8DD"/></svg></span></div>
-          </div>
-          <div class="film-meta">
-            <h3>[Film title]</h3>
-            <span class="year">[20XX]</span>
-          </div>
-          <p class="film-logline">[One-line logline describing the film goes here.]</p>
-        </button>
-      </div>
-      <a class="preview-link" href="films.html">View all films</a>
-    </div>
-  </section>
-
-  <section class="tight" id="writing-preview">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Writing</h2>
-        <p>Essays from fortepiano, my Substack.</p>
-      </div>
-      <div class="post-card" style="border-top:none; padding-top:0;">
-        <p class="pub">fortepiano &middot; [Post date]</p>
-        <h3>[Post title goes here]</h3>
-        <p class="no-cap">[A one- or two-sentence teaser of your latest post
-        goes here, pulled from the full piece on Substack.]</p>
-        <a class="read-link" href="writing.html">Read the full essay</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="tight" id="about-preview">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>About</h2>
-        <p></p>
-      </div>
-      <div class="about-teaser">
-        <p>[One or two sentences introducing yourself &mdash; your background
-        curating and executive producing documentary films, and where
-        you&rsquo;re based.]</p>
-        <a class="preview-link" href="about.html">More about mwbettis</a>
+      <div class="link-rows">
+        <a class="link-row" href="films.html">
+          <span class="link-row-title">Films</span>
+          <span class="link-row-desc">Short documentary work I&rsquo;ve curated and executive produced.</span>
+        </a>
+        <a class="link-row" href="writing.html">
+          <span class="link-row-title">Writing</span>
+          <span class="link-row-desc">fortepiano &mdash; essays on educating, thinking, and learning.</span>
+        </a>
+        <a class="link-row" href="about.html">
+          <span class="link-row-title">About</span>
+          <span class="link-row-desc">Background, credits, and how to get in touch.</span>
+        </a>
       </div>
     </div>
   </section>
