@@ -138,6 +138,12 @@ section.tight{ padding: clamp(50px, 8vw, 90px) 0; }
 .film-grid .film-card{ width: 100%; }
 .film-card:focus-visible{ outline: 2px solid var(--soft); outline-offset: 5px; }
 .film-frame{ position: relative; aspect-ratio: 16/10; background: linear-gradient(135deg, #2A251E, #14120F 70%); border: 1px solid var(--line); overflow: hidden; }
+.film-frame img{ position:absolute; inset:0; width:100%; height:100%; object-fit: cover; }
+.film-frame::after{
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(to bottom, rgba(20,18,15,0.15), rgba(20,18,15,0.55) 85%);
+  pointer-events: none;
+}
 .sprocket-row{ position:absolute; left:0; right:0; display:flex; justify-content:space-evenly; padding: 0 8px; z-index: 2; }
 .sprocket-row.top{ top:8px; } .sprocket-row.bottom{ bottom:8px; }
 .sprocket-row span{ width: 8px; height: 8px; border-radius: 1px; background: var(--ink); opacity: .55; }
@@ -232,11 +238,25 @@ footer{ border-top: 1px solid var(--line); padding: 40px 0 calc(40px + env(safe-
   <section>
     <div class="wrap">
       <div class="film-grid">
-        
-        <button class="film-card" data-title="[Film title]" data-year="[20XX]" data-video="">
+
+        <button class="film-card" data-title="Film at Hambidge" data-year="[20XX]" data-video="ILSsF9ai_1c">
           <div class="film-frame">
+            <img src="https://img.youtube.com/vi/ILSsF9ai_1c/hqdefault.jpg" alt="" loading="lazy">
             <div class="sprocket-row top" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="ph-mark">[Placeholder still &mdash; add a frame from the film]</div>
+            <div class="sprocket-row bottom" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="play"><span class="play-ring"><svg width="16" height="18" viewBox="0 0 16 18" fill="none"><path d="M1 1L15 9L1 17V1Z" fill="#EDE8DD"/></svg></span></div>
+          </div>
+          <div class="film-meta">
+            <h3>Film at Hambidge</h3>
+            <span class="year">[20XX]</span>
+          </div>
+          <p class="film-logline">[One-line logline describing the film goes here.]</p>
+        </button>
+
+        <button class="film-card" data-title="[Film title]" data-year="[20XX]" data-video="tJPt2uC8Vms">
+          <div class="film-frame">
+            <img src="https://img.youtube.com/vi/tJPt2uC8Vms/hqdefault.jpg" alt="" loading="lazy">
+            <div class="sprocket-row top" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
             <div class="sprocket-row bottom" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
             <div class="play"><span class="play-ring"><svg width="16" height="18" viewBox="0 0 16 18" fill="none"><path d="M1 1L15 9L1 17V1Z" fill="#EDE8DD"/></svg></span></div>
           </div>
@@ -246,11 +266,11 @@ footer{ border-top: 1px solid var(--line); padding: 40px 0 calc(40px + env(safe-
           </div>
           <p class="film-logline">[One-line logline describing the film goes here.]</p>
         </button>
-        
-        <button class="film-card" data-title="[Film title]" data-year="[20XX]" data-video="">
+
+        <button class="film-card" data-title="[Film title]" data-year="[20XX]" data-video="gH8IL0nV8kg">
           <div class="film-frame">
+            <img src="https://img.youtube.com/vi/gH8IL0nV8kg/hqdefault.jpg" alt="" loading="lazy">
             <div class="sprocket-row top" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="ph-mark">[Placeholder still &mdash; add a frame from the film]</div>
             <div class="sprocket-row bottom" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
             <div class="play"><span class="play-ring"><svg width="16" height="18" viewBox="0 0 16 18" fill="none"><path d="M1 1L15 9L1 17V1Z" fill="#EDE8DD"/></svg></span></div>
           </div>
@@ -260,34 +280,7 @@ footer{ border-top: 1px solid var(--line); padding: 40px 0 calc(40px + env(safe-
           </div>
           <p class="film-logline">[One-line logline describing the film goes here.]</p>
         </button>
-        
-        <button class="film-card" data-title="[Film title]" data-year="[20XX]" data-video="">
-          <div class="film-frame">
-            <div class="sprocket-row top" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="ph-mark">[Placeholder still &mdash; add a frame from the film]</div>
-            <div class="sprocket-row bottom" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="play"><span class="play-ring"><svg width="16" height="18" viewBox="0 0 16 18" fill="none"><path d="M1 1L15 9L1 17V1Z" fill="#EDE8DD"/></svg></span></div>
-          </div>
-          <div class="film-meta">
-            <h3>[Film title]</h3>
-            <span class="year">[20XX]</span>
-          </div>
-          <p class="film-logline">[One-line logline describing the film goes here.]</p>
-        </button>
-        
-        <button class="film-card" data-title="[Film title]" data-year="[20XX]" data-video="">
-          <div class="film-frame">
-            <div class="sprocket-row top" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="ph-mark">[Placeholder still &mdash; add a frame from the film]</div>
-            <div class="sprocket-row bottom" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="play"><span class="play-ring"><svg width="16" height="18" viewBox="0 0 16 18" fill="none"><path d="M1 1L15 9L1 17V1Z" fill="#EDE8DD"/></svg></span></div>
-          </div>
-          <div class="film-meta">
-            <h3>[Film title]</h3>
-            <span class="year">[20XX]</span>
-          </div>
-          <p class="film-logline">[One-line logline describing the film goes here.]</p>
-        </button>
+
       </div>
     </div>
   </section>
